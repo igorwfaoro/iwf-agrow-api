@@ -46,6 +46,17 @@ export class AuthService {
     });
   }
 
+  public async refresh(userId: string): Promise<UserAuthViewModel> {
+    const user = await User.repository().whereEqualTo('id', userId).findOne();
+
+    if (!user) throw new UnauthorizedException(MESSAGES.USER_NOT_FOUND);
+
+    return UserAuthViewModel.create({
+      user: UserViewModel.fromDocument(user),
+      token: this.buildToken(user)
+    });
+  }
+
   private buildToken(user: User): string {
     return this.jwtService.sign(UserJwt.fromDocument(user).toPlain());
   }
