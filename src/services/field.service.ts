@@ -4,9 +4,12 @@ import { Field } from '../models/documents/field';
 import { FieldInputModel } from '../models/input-models/field.input-model';
 import { FieldViewModel } from '../models/view-models/field.view-model';
 import { MESSAGES } from '../util/messages';
+import { WeatherService } from './weather.service';
 
 @Injectable()
 export class FieldService {
+  constructor(private readonly weatherService: WeatherService) {}
+
   public async list(userId: string): Promise<FieldViewModel[]> {
     const fields = await Field.repository()
       .whereEqualTo('userId', userId)
@@ -30,7 +33,12 @@ export class FieldService {
     userId: string,
     input: FieldInputModel
   ): Promise<FieldViewModel> {
-    const field = Field.create({ ...input, userId });
+    // TODO: get center point
+    const weather = await this.weatherService.getFromLocation(
+      input.areaPolygon[0]
+    );
+
+    const field = Field.create({ ...input, weather, userId });
     const newField = await Field.repository().create(field);
     return FieldViewModel.fromDocument(newField);
   }

@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { CoordinatePoint } from '../documents/field';
+import { CoordinatePoint } from '../common/coordinate';
 
 export class FieldInputModel {
   @IsNotEmpty()
@@ -14,6 +14,7 @@ export class FieldInputModel {
   @IsNotEmpty()
   public color: string;
 
+  // TODO: transform to [number, number][]
   @IsNotEmpty()
   public areaPolygon: CoordinatePoint[];
 }

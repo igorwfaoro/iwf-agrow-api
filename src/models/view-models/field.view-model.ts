@@ -1,8 +1,10 @@
-import { CoordinatePoint, Field } from '../documents/field';
+import { CoordinatePoint } from '../common/coordinate';
+import { Field } from '../documents/field';
 import { FieldObserver } from '../documents/field-observer';
 import { User } from '../documents/user';
 import { FieldObserverViewModel } from './field-observer.view-model';
 import { UserViewModel } from './user.view-model';
+import { WeatherViewModel } from './weather.view-model';
 
 export class FieldViewModel {
   public id: string;
@@ -11,6 +13,7 @@ export class FieldViewModel {
   public icon: string;
   public color: string;
   public areaPolygon: CoordinatePoint[];
+  public weather: WeatherViewModel;
   public createdAt: string;
 
   public userId: string;
@@ -29,6 +32,7 @@ export class FieldViewModel {
     viewModel.icon = doc.icon;
     viewModel.color = doc.color;
     viewModel.areaPolygon = doc.areaPolygon;
+    viewModel.weather = WeatherViewModel.fromDocument(doc.weather);
     viewModel.createdAt = doc.createdAt;
 
     viewModel.userId = doc.userId;

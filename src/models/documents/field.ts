@@ -1,10 +1,8 @@
 import * as dayjs from 'dayjs';
 import { Collection, getRepository, Type } from 'fireorm';
-
-export class CoordinatePoint {
-  public lat: number;
-  public lng: number;
-}
+import { toPlain } from '../../util/helpers/object.helper';
+import { CoordinatePoint } from '../common/coordinate';
+import { Weather } from '../common/weather';
 
 @Collection('fields')
 export class Field {
@@ -19,6 +17,9 @@ export class Field {
   @Type(() => CoordinatePoint)
   public areaPolygon: CoordinatePoint[];
 
+  @Type(() => Weather)
+  public weather: Weather;
+
   public static repository() {
     return getRepository(Field);
   }
@@ -30,6 +31,7 @@ export class Field {
     icon: string;
     color: string;
     areaPolygon: CoordinatePoint[];
+    weather: Weather;
   }): Field {
     const field = new Field();
 
@@ -38,7 +40,8 @@ export class Field {
     field.culture = props.culture;
     field.icon = props.icon;
     field.color = props.color;
-    field.areaPolygon = props.areaPolygon;
+    field.areaPolygon = toPlain(props.areaPolygon);
+    field.weather = toPlain(props.weather);
     field.createdAt = dayjs().toISOString();
 
     return field;

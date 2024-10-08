@@ -9,6 +9,8 @@ export const MESSAGES = {
   USER_NOT_FOUND: 'Usuário não encontrado',
   INVALID_USER: 'Usuário inválido',
   FIELD_OBSERVER_NOT_FOUND: 'Monitoramento não encontrado',
+  EXTERNAL_SERVICE_ERROR: 'Erro em serviço externo',
+  WEATHER_API_ERROR: 'Erro ao obter dados meteorológicos',
 
   CLASS_VALIDATOR: {
     isEmail: '"$property" precisa ser um e-mail válido.',

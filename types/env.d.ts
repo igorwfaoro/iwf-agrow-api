@@ -5,5 +5,7 @@ namespace NodeJS {
     FIREBASE_PRIVATE_KEY: string;
 
     JWT_SECRET: string;
+
+    WEATHER_API_URL: string;
   }
 }

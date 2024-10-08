@@ -10,6 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { FieldObserverService } from './services/field-observer.service';
 import { FieldService } from './services/field.service';
+import { WeatherService } from './services/weather.service';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { FieldService } from './services/field.service';
     },
     AuthService,
     FieldService,
-    FieldObserverService
+    FieldObserverService,
+    WeatherService
   ]
 })
 export class AppModule {}
