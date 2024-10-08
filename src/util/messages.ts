@@ -8,6 +8,7 @@ export const MESSAGES = {
   FIELD_NOT_FOUND: 'Campo não encontrado',
   USER_NOT_FOUND: 'Usuário não encontrado',
   INVALID_USER: 'Usuário inválido',
+  FIELD_OBSERVER_NOT_FOUND: 'Monitoramento não encontrado',
 
   CLASS_VALIDATOR: {
     isEmail: '"$property" precisa ser um e-mail válido.',

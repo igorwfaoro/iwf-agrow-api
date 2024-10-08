@@ -10,8 +10,6 @@ export class FieldService {
   public async list(userId: string): Promise<FieldViewModel[]> {
     const fields = await Field.repository()
       .whereEqualTo('userId', userId)
-      .orderByAscending('culture')
-      .orderByAscending('name')
       .find();
 
     return fields.map(FieldViewModel.fromDocument);
@@ -33,8 +31,6 @@ export class FieldService {
     input: FieldInputModel
   ): Promise<FieldViewModel> {
     const field = Field.create({ ...input, userId });
-    console.log(JSON.stringify(field, null, 2));
-
     const newField = await Field.repository().create(field);
     return FieldViewModel.fromDocument(newField);
   }

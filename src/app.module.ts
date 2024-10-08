@@ -4,9 +4,11 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controllers/auth.controller';
 import { DefaultController } from './controllers/default.controller';
+import { FieldObserversController } from './controllers/field-observers.controller';
 import { FieldsController } from './controllers/fields.controller';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
+import { FieldObserverService } from './services/field-observer.service';
 import { FieldService } from './services/field.service';
 
 @Module({
@@ -17,14 +19,20 @@ import { FieldService } from './services/field.service';
       signOptions: { expiresIn: '30d' }
     })
   ],
-  controllers: [DefaultController, AuthController, FieldsController],
+  controllers: [
+    DefaultController,
+    AuthController,
+    FieldsController,
+    FieldObserversController
+  ],
   providers: [
     {
       provide: APP_GUARD,
       useClass: AuthGuard
     },
     AuthService,
-    FieldService
+    FieldService,
+    FieldObserverService
   ]
 })
 export class AppModule {}
