@@ -11,16 +11,16 @@ export const STRINGS = {
   FIELD_OBSERVER_NOT_FOUND: 'Monitoramento não encontrado',
   EXTERNAL_SERVICE_ERROR: 'Erro em serviço externo',
   WEATHER_API_ERROR: 'Erro ao obter dados meteorológicos',
-  
-  WHEATER_KEYS: {
-    airPressureAtSeaLevel: 'Pressão Atmosférica'
-    airTemperature: 'Temperatura'
-    cloudAreaFraction
-    relativeHumidity
-    windFromDirection
-    windSpeed
-    fogAreaFraction
-    precipitationAmount1h
+
+  WEATHER_KEYS: {
+    airPressureAtSeaLevel: 'Pressão Atmosférica',
+    airTemperature: 'Temperatura',
+    cloudAreaFraction: 'Nuvens',
+    relativeHumidity: 'Umidade',
+    windFromDirection: 'Direção do Vento',
+    windSpeed: 'Velocidade do Vento',
+    fogAreaFraction: 'Neblina',
+    precipitationAmount1h: 'Chuva (1h)'
   },
 
   CLASS_VALIDATOR: {

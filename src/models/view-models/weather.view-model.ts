@@ -1,8 +1,10 @@
+import { STRINGS } from 'src/util/strings';
 import { Weather } from '../common/weather';
 
 interface WeatherItem {
   value: number;
   unit: string;
+  name: string;
   formatted: string;
 }
 
@@ -34,6 +36,7 @@ export class WeatherViewModel {
       viewModel[key] = {
         value: doc[key],
         unit: UNITS[key],
+        name: STRINGS.WEATHER_KEYS[key],
         formatted: `${doc[key]}${UNITS[key]}`
       };
     });
