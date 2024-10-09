@@ -3,7 +3,7 @@ import { NotFoundException } from '../exceptions/not-found.exception';
 import { Field } from '../models/documents/field';
 import { FieldInputModel } from '../models/input-models/field.input-model';
 import { FieldViewModel } from '../models/view-models/field.view-model';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 import { WeatherService } from './weather.service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class FieldService {
       .whereEqualTo('id', id)
       .findOne();
 
-    if (!field) throw new NotFoundException(MESSAGES.FIELD_NOT_FOUND);
+    if (!field) throw new NotFoundException(STRINGS.FIELD_NOT_FOUND);
 
     return FieldViewModel.fromDocument(field);
   }
@@ -33,9 +33,8 @@ export class FieldService {
     userId: string,
     input: FieldInputModel
   ): Promise<FieldViewModel> {
-    // TODO: get center point
     const weather = await this.weatherService.getFromLocation(
-      input.areaPolygon[0]
+      input.coordinatePoint
     );
 
     const field = Field.create({ ...input, weather, userId });
@@ -53,13 +52,12 @@ export class FieldService {
       .whereEqualTo('id', id)
       .findOne();
 
-    if (!field) throw new NotFoundException(MESSAGES.FIELD_NOT_FOUND);
+    if (!field) throw new NotFoundException(STRINGS.FIELD_NOT_FOUND);
 
     field.name = input.name;
     field.culture = input.culture;
-    field.icon = input.icon;
     field.color = input.color;
-    field.areaPolygon = input.areaPolygon;
+    field.coordinatePoint = input.coordinatePoint;
 
     const updatedField = await Field.repository().update(field);
 
@@ -72,7 +70,7 @@ export class FieldService {
       .whereEqualTo('id', id)
       .findOne();
 
-    if (!field) throw new NotFoundException(MESSAGES.FIELD_NOT_FOUND);
+    if (!field) throw new NotFoundException(STRINGS.FIELD_NOT_FOUND);
 
     await Field.repository().delete(field.id);
   }

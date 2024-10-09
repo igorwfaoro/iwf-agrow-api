@@ -6,7 +6,7 @@ import { UnauthorizedException } from '../exceptions/unauthorized.exception';
 import { UserJwt } from '../models/common/user-jwt';
 import { User } from '../models/documents/user';
 import { IS_PUBLIC_KEY } from '../util/constants';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -38,7 +38,7 @@ export class AuthGuard implements CanActivate {
       });
 
       if (!User.repository().findById(payload.id)) {
-        throw new UnauthorizedException(MESSAGES.INVALID_USER);
+        throw new UnauthorizedException(STRINGS.INVALID_USER);
       }
 
       request['user'] = payload;

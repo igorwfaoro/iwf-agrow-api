@@ -1,4 +1,4 @@
-export const MESSAGES = {
+export const STRINGS = {
   USER_WITH_EMAIL_ALREADY_EXISTS: 'Usuário com este e-mail já existe',
   INVALID_EMAIL_OR_PASSWORD: 'E-mail ou senha inválida',
   ALREADY_EXISTS: 'Já existe',
@@ -11,6 +11,17 @@ export const MESSAGES = {
   FIELD_OBSERVER_NOT_FOUND: 'Monitoramento não encontrado',
   EXTERNAL_SERVICE_ERROR: 'Erro em serviço externo',
   WEATHER_API_ERROR: 'Erro ao obter dados meteorológicos',
+  
+  WHEATER_KEYS: {
+    airPressureAtSeaLevel: 'Pressão Atmosférica'
+    airTemperature: 'Temperatura'
+    cloudAreaFraction
+    relativeHumidity
+    windFromDirection
+    windSpeed
+    fogAreaFraction
+    precipitationAmount1h
+  },
 
   CLASS_VALIDATOR: {
     isEmail: '"$property" precisa ser um e-mail válido.',

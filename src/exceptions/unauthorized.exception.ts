@@ -1,8 +1,8 @@
 import { UnauthorizedException as CommonUnauthorizedException } from '@nestjs/common';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 export class UnauthorizedException extends CommonUnauthorizedException {
-  constructor(message: string = MESSAGES.UNAUTHORIZED) {
+  constructor(message: string = STRINGS.UNAUTHORIZED) {
     super(message);
   }
 }

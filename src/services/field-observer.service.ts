@@ -3,7 +3,7 @@ import { NotFoundException } from '../exceptions/not-found.exception';
 import { FieldObserver } from '../models/documents/field-observer';
 import { FieldObserverInputModel } from '../models/input-models/field-observer.input-model';
 import { FieldObserverViewModel } from '../models/view-models/field-observer.view-model';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 @Injectable()
 export class FieldObserverService {
@@ -31,7 +31,7 @@ export class FieldObserverService {
       .findOne();
 
     if (!observer)
-      throw new NotFoundException(MESSAGES.FIELD_OBSERVER_NOT_FOUND);
+      throw new NotFoundException(STRINGS.FIELD_OBSERVER_NOT_FOUND);
 
     return FieldObserverViewModel.fromDocument(observer);
   }
@@ -59,7 +59,7 @@ export class FieldObserverService {
       .findOne();
 
     if (!observer)
-      throw new NotFoundException(MESSAGES.FIELD_OBSERVER_NOT_FOUND);
+      throw new NotFoundException(STRINGS.FIELD_OBSERVER_NOT_FOUND);
 
     observer.metric = input.metric;
     observer.operator = input.operator;
@@ -84,7 +84,7 @@ export class FieldObserverService {
       .findOne();
 
     if (!observer)
-      throw new NotFoundException(MESSAGES.FIELD_OBSERVER_NOT_FOUND);
+      throw new NotFoundException(STRINGS.FIELD_OBSERVER_NOT_FOUND);
 
     await FieldObserver.repository().delete(observer.id);
   }

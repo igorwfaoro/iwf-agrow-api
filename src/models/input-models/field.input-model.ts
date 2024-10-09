@@ -9,12 +9,8 @@ export class FieldInputModel {
   public culture: string;
 
   @IsNotEmpty()
-  public icon: string;
-
-  @IsNotEmpty()
   public color: string;
 
-  // TODO: transform to [number, number][]
   @IsNotEmpty()
-  public areaPolygon: CoordinatePoint[];
+  public coordinatePoint: CoordinatePoint;
 }

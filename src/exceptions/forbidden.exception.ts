@@ -1,8 +1,8 @@
 import { ForbiddenException as CommonForbiddenException } from '@nestjs/common';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 export class ForbiddenException extends CommonForbiddenException {
-  constructor(message: string = MESSAGES.FORBIDDEN) {
+  constructor(message: string = STRINGS.FORBIDDEN) {
     super(message);
   }
 }

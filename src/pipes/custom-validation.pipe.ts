@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 @Injectable()
 export class CustomValidationPipe implements PipeTransform<any> {
@@ -44,7 +44,7 @@ export class CustomValidationPipe implements PipeTransform<any> {
 
   private buildErrorMessages(error: any): string[] {
     return Object.keys(error.constraints).map((constraintKey) => {
-      let messageTemplate = MESSAGES.CLASS_VALIDATOR[constraintKey];
+      let messageTemplate = STRINGS.CLASS_VALIDATOR[constraintKey];
       if (messageTemplate) {
         messageTemplate = this.replacePlaceholders(
           messageTemplate,

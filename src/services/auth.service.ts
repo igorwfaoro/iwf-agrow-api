@@ -8,7 +8,7 @@ import { UserAuthenticateInputModel } from '../models/input-models/user-authenti
 import { UserRegisterInputModel } from '../models/input-models/user-register.input-model';
 import { UserAuthViewModel } from '../models/view-models/user-auth.view-model';
 import { UserViewModel } from '../models/view-models/user.view-model';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
     input: UserRegisterInputModel
   ): Promise<UserAuthViewModel> {
     if (await User.repository().whereEqualTo('email', input.email).findOne())
-      throw new AlreadyExistsException(MESSAGES.USER_WITH_EMAIL_ALREADY_EXISTS);
+      throw new AlreadyExistsException(STRINGS.USER_WITH_EMAIL_ALREADY_EXISTS);
 
     const user = User.create(input);
 
@@ -38,7 +38,7 @@ export class AuthService {
       .findOne();
 
     if (!user || !bcrypt.compareSync(input.password, user.password))
-      throw new UnauthorizedException(MESSAGES.INVALID_EMAIL_OR_PASSWORD);
+      throw new UnauthorizedException(STRINGS.INVALID_EMAIL_OR_PASSWORD);
 
     return UserAuthViewModel.create({
       user: UserViewModel.fromDocument(user),
@@ -49,7 +49,7 @@ export class AuthService {
   public async refresh(userId: string): Promise<UserAuthViewModel> {
     const user = await User.repository().whereEqualTo('id', userId).findOne();
 
-    if (!user) throw new UnauthorizedException(MESSAGES.USER_NOT_FOUND);
+    if (!user) throw new UnauthorizedException(STRINGS.USER_NOT_FOUND);
 
     return UserAuthViewModel.create({
       user: UserViewModel.fromDocument(user),

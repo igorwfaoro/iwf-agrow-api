@@ -10,12 +10,11 @@ export class Field {
   public userId: string;
   public name: string;
   public culture: string;
-  public icon: string;
   public color: string;
   public createdAt: string;
 
   @Type(() => CoordinatePoint)
-  public areaPolygon: CoordinatePoint[];
+  public coordinatePoint: CoordinatePoint;
 
   @Type(() => Weather)
   public weather: Weather;
@@ -28,9 +27,8 @@ export class Field {
     userId: string;
     name: string;
     culture: string;
-    icon: string;
     color: string;
-    areaPolygon: CoordinatePoint[];
+    coordinatePoint: CoordinatePoint;
     weather: Weather;
   }): Field {
     const field = new Field();
@@ -38,9 +36,8 @@ export class Field {
     field.userId = props.userId;
     field.name = props.name;
     field.culture = props.culture;
-    field.icon = props.icon;
     field.color = props.color;
-    field.areaPolygon = toPlain(props.areaPolygon);
+    field.coordinatePoint = toPlain(props.coordinatePoint);
     field.weather = toPlain(props.weather);
     field.createdAt = dayjs().toISOString();
 

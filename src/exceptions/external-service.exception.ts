@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
 
 export class ExternalServiceException extends HttpException {
-  constructor(message: string = MESSAGES.EXTERNAL_SERVICE_ERROR) {
+  constructor(message: string = STRINGS.EXTERNAL_SERVICE_ERROR) {
     super(message, HttpStatus.BAD_GATEWAY);
   }
 }

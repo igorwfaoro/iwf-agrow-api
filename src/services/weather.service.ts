@@ -3,7 +3,9 @@ import axios from 'axios';
 import { ExternalServiceException } from '../exceptions/external-service.exception';
 import { CoordinatePoint } from '../models/common/coordinate';
 import { Weather, WeatherCreate } from '../models/common/weather';
-import { MESSAGES } from '../util/messages';
+import { STRINGS } from '../util/strings';
+
+const WEATHER_API_USER_AGENT = 'iwf-agrow-api';
 
 @Injectable()
 export class WeatherService {
@@ -15,7 +17,7 @@ export class WeatherService {
       const response = await axios.get(
         `${process.env.WEATHER_API_URL}/complete`,
         {
-          headers: { 'User-Agent': 'iwf-agrow' },
+          headers: { 'User-Agent': WEATHER_API_USER_AGENT },
           params: { lat, lon }
         }
       );
@@ -47,7 +49,7 @@ export class WeatherService {
       });
     } catch (error) {
       console.error(error);
-      throw new ExternalServiceException(MESSAGES.WEATHER_API_ERROR);
+      throw new ExternalServiceException(STRINGS.WEATHER_API_ERROR);
     }
   }
 }
