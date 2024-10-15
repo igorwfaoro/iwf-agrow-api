@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { toPlain } from 'src/util/helpers/object.helper';
+import { STRINGS } from 'src/util/strings';
 import { NotFoundException } from '../exceptions/not-found.exception';
 import { Field } from '../models/documents/field';
 import { FieldInputModel } from '../models/input-models/field.input-model';
 import { FieldViewModel } from '../models/view-models/field.view-model';
-import { STRINGS } from '../util/strings';
 import { WeatherService } from './weather.service';
 
 @Injectable()
@@ -59,7 +60,7 @@ export class FieldService {
     field.color = input.color;
     field.coordinatePoint = input.coordinatePoint;
 
-    const updatedField = await Field.repository().update(field);
+    const updatedField = await Field.repository().update(toPlain(field));
 
     return FieldViewModel.fromDocument(updatedField);
   }
