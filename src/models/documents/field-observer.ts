@@ -1,9 +1,9 @@
 import * as dayjs from 'dayjs';
 import { Collection, getRepository } from 'fireorm';
+import { Document } from 'src/models/abstract/document';
 
 @Collection('fieldObserver')
-export class FieldObserver {
-  public id: string;
+export class FieldObserver extends Document {
   public userId: string;
   public fieldId: string;
   public metric: string;

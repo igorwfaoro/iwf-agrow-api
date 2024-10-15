@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { toPlain } from 'src/util/helpers/object.helper';
+import { Cron } from '@nestjs/schedule';
+import * as dayjs from 'dayjs';
 import { STRINGS } from 'src/util/strings';
 import { NotFoundException } from '../exceptions/not-found.exception';
 import { Field } from '../models/documents/field';
@@ -39,7 +40,7 @@ export class FieldService {
     );
 
     const field = Field.create({ ...input, weather, userId });
-    const newField = await Field.repository().create(field);
+    const newField = await Field.repository().create(field.toPlain());
     return FieldViewModel.fromDocument(newField);
   }
 
@@ -60,7 +61,7 @@ export class FieldService {
     field.color = input.color;
     field.coordinatePoint = input.coordinatePoint;
 
-    const updatedField = await Field.repository().update(toPlain(field));
+    const updatedField = await Field.repository().update(field.toPlain());
 
     return FieldViewModel.fromDocument(updatedField);
   }
@@ -74,5 +75,23 @@ export class FieldService {
     if (!field) throw new NotFoundException(STRINGS.FIELD_NOT_FOUND);
 
     await Field.repository().delete(field.id);
+  }
+
+  @Cron('*/15 * * * *')
+  public async updateWeather(): Promise<void> {
+    const fields = await Field.repository().find();
+
+    const weatherPromises = fields.map((field) =>
+      this.weatherService.getFromLocation(field.coordinatePoint)
+    );
+
+    Promise.all(weatherPromises).then((weathers) => {
+      fields.forEach(async (field, index) => {
+        field.weather = weathers[index];
+        field.lastWeatherUpdate = dayjs().toISOString();
+
+        await Field.repository().update(field.toPlain());
+      });
+    });
   }
 }

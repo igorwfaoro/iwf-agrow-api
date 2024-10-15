@@ -1,3 +1,4 @@
+import { toPlain } from 'src/util/helpers/object.helper';
 import { User } from '../documents/user';
 
 export class UserJwt {
@@ -18,11 +19,6 @@ export class UserJwt {
   }
 
   public toPlain() {
-    return {
-      id: this.id,
-      name: this.name,
-      email: this.email,
-      createdAt: this.createdAt
-    };
+    return toPlain(this);
   }
 }

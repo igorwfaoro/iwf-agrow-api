@@ -1,16 +1,16 @@
 import * as dayjs from 'dayjs';
 import { Collection, getRepository, Type } from 'fireorm';
-import { toPlain } from '../../util/helpers/object.helper';
+import { Document } from 'src/models/abstract/document';
 import { CoordinatePoint } from '../common/coordinate';
 import { Weather } from '../common/weather';
 
 @Collection('fields')
-export class Field {
-  public id: string;
+export class Field extends Document {
   public userId: string;
   public name: string;
   public culture: string;
   public color: string;
+  public lastWeatherUpdate: string;
   public createdAt: string;
 
   @Type(() => CoordinatePoint)
@@ -37,8 +37,9 @@ export class Field {
     field.name = props.name;
     field.culture = props.culture;
     field.color = props.color;
-    field.coordinatePoint = toPlain(props.coordinatePoint);
-    field.weather = toPlain(props.weather);
+    field.coordinatePoint = props.coordinatePoint;
+    field.weather = props.weather;
+    field.lastWeatherUpdate = dayjs().toISOString();
     field.createdAt = dayjs().toISOString();
 
     return field;

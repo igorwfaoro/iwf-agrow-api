@@ -1,11 +1,11 @@
 import * as bcrypt from 'bcrypt';
 import * as dayjs from 'dayjs';
 import { Collection, getRepository } from 'fireorm';
+import { Document } from 'src/models/abstract/document';
 import { USER_PASSWORD_HASH_SALT } from '../../util/constants';
 
 @Collection('users')
-export class User {
-  public id: string;
+export class User extends Document {
   public name: string;
   public email: string;
   public password: string;

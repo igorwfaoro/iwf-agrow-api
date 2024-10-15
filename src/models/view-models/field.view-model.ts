@@ -11,6 +11,7 @@ export class FieldViewModel {
   public color: string;
   public coordinatePoint: CoordinatePoint;
   public weather: WeatherViewModel;
+  public lastWeatherUpdate: string;
   public createdAt: string;
 
   public observers?: FieldObserverViewModel[];
@@ -26,6 +27,7 @@ export class FieldViewModel {
     viewModel.color = doc.color;
     viewModel.coordinatePoint = doc.coordinatePoint;
     viewModel.weather = WeatherViewModel.fromDocument(doc.weather);
+    viewModel.lastWeatherUpdate = doc.lastWeatherUpdate;
     viewModel.createdAt = doc.createdAt;
 
     viewModel.observers = doc.observers?.map(
